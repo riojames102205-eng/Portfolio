@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+
     /* ========================= */
     /* DARK MODE */
     /* ========================= */
@@ -7,17 +8,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const darkModeBtn =
         document.getElementById("darkModeBtn");
 
+
     if (darkModeBtn) {
 
         if (
-            localStorage.getItem("darkMode") === "enabled"
+            localStorage.getItem("darkMode") ===
+            "enabled"
         ) {
 
             document.body.classList.add("dark");
 
             darkModeBtn.textContent = "☀️";
-
         }
+
 
         darkModeBtn.addEventListener(
             "click",
@@ -25,8 +28,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 document.body.classList.toggle("dark");
 
+
                 if (
-                    document.body.classList.contains("dark")
+                    document.body.classList.contains(
+                        "dark"
+                    )
                 ) {
 
                     darkModeBtn.textContent = "☀️";
@@ -53,6 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+
     /* ========================= */
     /* TYPING EFFECT */
     /* ========================= */
@@ -60,19 +67,26 @@ document.addEventListener("DOMContentLoaded", function () {
     const typing =
         document.getElementById("typing");
 
+
     if (typing) {
 
         const words = [
 
             "Computer Engineering Student",
+
             "Future Software Engineer",
+
             "Web Developer",
+
             "Arduino Enthusiast"
 
         ];
 
+
         let wordIndex = 0;
+
         let letterIndex = 0;
+
         let deleting = false;
 
 
@@ -100,13 +114,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     deleting = true;
 
+
                     setTimeout(
                         typeEffect,
                         1500
                     );
 
-                    return;
 
+                    return;
                 }
 
             } else {
@@ -120,18 +135,21 @@ document.addEventListener("DOMContentLoaded", function () {
                 letterIndex--;
 
 
-                if (letterIndex === 0) {
+                if (
+                    letterIndex === 0
+                ) {
 
                     deleting = false;
 
                     wordIndex++;
 
+
                     if (
-                        wordIndex >= words.length
+                        wordIndex >=
+                        words.length
                     ) {
 
                         wordIndex = 0;
-
                     }
 
                 }
@@ -152,12 +170,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+
     /* ========================= */
     /* SCROLL REVEAL */
     /* ========================= */
 
     const revealElements =
-        document.querySelectorAll(".reveal");
+        document.querySelectorAll(
+            ".reveal"
+        );
 
 
     function revealOnScroll() {
@@ -166,7 +187,10 @@ document.addEventListener("DOMContentLoaded", function () {
             function (element) {
 
                 const position =
-                    element.getBoundingClientRect().top;
+                    element
+                        .getBoundingClientRect()
+                        .top;
+
 
                 const screenHeight =
                     window.innerHeight;
@@ -194,7 +218,9 @@ document.addEventListener("DOMContentLoaded", function () {
         revealOnScroll
     );
 
+
     revealOnScroll();
+
 
 
     /* ========================= */
@@ -202,7 +228,9 @@ document.addEventListener("DOMContentLoaded", function () {
     /* ========================= */
 
     const cards =
-        document.querySelectorAll(".card");
+        document.querySelectorAll(
+            ".card"
+        );
 
 
     cards.forEach(
@@ -216,11 +244,14 @@ document.addEventListener("DOMContentLoaded", function () {
                         "card-click"
                     );
 
+
                     void card.offsetWidth;
+
 
                     card.classList.add(
                         "card-click"
                     );
+
 
                     setTimeout(
                         function () {
@@ -239,7 +270,171 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     );
 
+
+
+    /* ========================= */
+    /* ACTIVE NAVIGATION */
+    /* ========================= */
+
+    const navLinks =
+        Array.from(
+            document.querySelectorAll(
+                'nav a[href^="#"]'
+            )
+        ).filter(
+            link =>
+                document.querySelector(
+                    link.getAttribute("href")
+                )
+        );
+
+
+    const sections =
+        Array.from(
+            document.querySelectorAll(
+                "section[id]"
+            )
+        );
+
+
+    function setActiveNav(id) {
+
+        navLinks.forEach(
+            function (link) {
+
+                link.classList.remove(
+                    "active"
+                );
+
+
+                if (
+                    link.getAttribute("href") ===
+                    `#${id}`
+                ) {
+
+                    link.classList.add(
+                        "active"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+
+    function updateActiveNavOnScroll() {
+
+        const marker =
+            window.scrollY +
+            (
+                window.innerHeight *
+                0.35
+            );
+
+
+        let currentSection =
+            sections[0];
+
+
+        sections.forEach(
+            function (section) {
+
+                if (
+                    section.offsetTop <=
+                    marker
+                ) {
+
+                    currentSection =
+                        section;
+
+                }
+
+            }
+        );
+
+
+        if (currentSection) {
+
+            setActiveNav(
+                currentSection.id
+            );
+
+        }
+
+    }
+
+
+
+    /* CLICK NAVIGATION */
+
+    navLinks.forEach(
+        function (link) {
+
+            link.addEventListener(
+                "click",
+                function () {
+
+                    setActiveNav(
+                        this
+                            .getAttribute(
+                                "href"
+                            )
+                            .substring(1)
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+
+    /* SCROLL NAVIGATION */
+
+    let navScrollTicking =
+        false;
+
+
+    window.addEventListener(
+        "scroll",
+        function () {
+
+            if (!navScrollTicking) {
+
+                window.requestAnimationFrame(
+                    function () {
+
+                        updateActiveNavOnScroll();
+
+                        navScrollTicking =
+                            false;
+
+                    }
+                );
+
+
+                navScrollTicking =
+                    true;
+            }
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+
+    /* INITIAL NAV STATE */
+
+    updateActiveNavOnScroll();
+
 });
+
 
 
 /* ========================= */
@@ -247,7 +442,9 @@ document.addEventListener("DOMContentLoaded", function () {
 /* ========================= */
 
 document
-    .querySelectorAll('a[href^="#"]')
+    .querySelectorAll(
+        'a[href^="#"]'
+    )
     .forEach(
         function (link) {
 
@@ -256,7 +453,10 @@ document
                 function (e) {
 
                     const targetId =
-                        this.getAttribute("href");
+                        this.getAttribute(
+                            "href"
+                        );
+
 
                     const target =
                         document.querySelector(
@@ -264,7 +464,9 @@ document
                         );
 
 
-                    if (!target) return;
+                    if (!target) {
+                        return;
+                    }
 
 
                     e.preventDefault();
@@ -276,7 +478,9 @@ document
                         "section-focus"
                     );
 
+
                     void target.offsetWidth;
+
 
                     target.classList.add(
                         "section-focus"
@@ -294,7 +498,7 @@ document
                     });
 
 
-                    /* Remove animation class */
+                    /* Remove animation */
 
                     setTimeout(
                         function () {
@@ -312,5 +516,3 @@ document
 
         }
     );
-
-    
