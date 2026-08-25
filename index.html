@@ -12,11 +12,59 @@
 
     <title>James Benedict Magsino | Portfolio</title>
 
+    <meta
+        name="description"
+        content="Portfolio of James Benidict Magsino — Computer Engineering student passionate about software development, web technologies, IoT, and Arduino."
+    >
+
+    <meta
+        property="og:title"
+        content="James Benidict Magsino | Portfolio"
+    >
+
+    <meta
+        property="og:description"
+        content="Computer Engineering student — software development, web technologies, IoT, and Arduino projects."
+    >
+
+    <meta
+        property="og:type"
+        content="website"
+    >
+
+    <link
+        rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Space+Grotesk:wght@600;700&family=JetBrains+Mono:wght@500&display=swap"
+    >
+
     <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
+
+
+    <!-- ========================= -->
+    <!-- SCROLL PROGRESS BAR -->
+    <!-- ========================= -->
+
+    <div class="scroll-progress" id="scrollProgress"></div>
 
 
     <!-- ========================= -->
@@ -84,6 +132,15 @@
                 </li>
 
             </ul>
+
+
+            <button
+                id="menuBtn"
+                class="menu-btn"
+                aria-label="Toggle navigation menu"
+            >
+                ☰
+            </button>
 
         </nav>
 
@@ -415,6 +472,16 @@
 
                     </p>
 
+
+                    <a
+                        href="https://github.com/riojames102205-eng"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project-link"
+                    >
+                        View Code →
+                    </a>
+
                 </div>
 
 
@@ -437,6 +504,16 @@
 
                     </p>
 
+
+                    <a
+                        href="https://github.com/riojames102205-eng"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project-link"
+                    >
+                        View Code →
+                    </a>
+
                 </div>
 
 
@@ -458,6 +535,16 @@
                         embedded-system concepts.
 
                     </p>
+
+
+                    <a
+                        href="https://github.com/riojames102205-eng"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project-link"
+                    >
+                        View Code →
+                    </a>
 
                 </div>
 
@@ -574,6 +661,7 @@
                         <img
                             src="images/java-certificate.jpg"
                             alt="Java Fundamentals Certificate"
+                            loading="lazy"
                         >
 
                     </div>
@@ -609,8 +697,9 @@
                     <div class="certificate-image">
 
                         <img
-                            src="images/ai-learning-series-certificate.png"
+                            src="images/ai-learning-series-certificate.jpg"
                             alt="AI Learning Series Certificate of Participation"
+                            loading="lazy"
                         >
 
                     </div>
@@ -630,7 +719,7 @@
 
 
                     <a
-                        href="images/ai-learning-series-certificate.png"
+                        href="images/ai-learning-series-certificate.jpg"
                         target="_blank"
                         class="btn"
                     >
@@ -648,6 +737,7 @@
                         <img
                             src="images/siemens-certificate.jpg"
                             alt="Siemens Certificate"
+                            loading="lazy"
                         >
 
                     </div>
@@ -768,7 +858,7 @@
 
 
                 <a
-                    href="./resume.pdf"
+                    href="./Resume.pdf"
                     class="btn resume-button"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -778,7 +868,7 @@
 
 
                 <a
-                    href="./resume.pdf"
+                    href="./Resume.pdf"
                     class="btn2 resume-button"
                     download="James-Benidict-Magsino-Resume.pdf"
                 >
@@ -801,11 +891,21 @@
     <footer>
 
         <p>
-            © 2026 James Benidict Magsino.
+            © <span id="year">2026</span> James Benidict Magsino.
             All rights reserved.
         </p>
 
     </footer>
+
+
+
+    <button
+        id="backToTop"
+        class="back-to-top"
+        aria-label="Back to top"
+    >
+        ↑
+    </button>
 
 
 
