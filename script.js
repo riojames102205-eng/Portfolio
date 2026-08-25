@@ -15,7 +15,6 @@ document.addEventListener(
 
         if (darkModeBtn) {
 
-
             if (
                 localStorage.getItem(
                     "darkMode"
@@ -85,7 +84,6 @@ document.addEventListener(
 
         if (typing) {
 
-
             const words = [
 
                 "Computer Engineering Student",
@@ -108,20 +106,17 @@ document.addEventListener(
 
             function typeEffect() {
 
-
                 const currentWord =
                     words[wordIndex];
 
 
                 if (!deleting) {
 
-
                     typing.textContent =
                         currentWord.substring(
                             0,
                             letterIndex + 1
                         );
-
 
                     letterIndex++;
 
@@ -146,13 +141,11 @@ document.addEventListener(
 
                 } else {
 
-
                     typing.textContent =
                         currentWord.substring(
                             0,
                             letterIndex - 1
                         );
-
 
                     letterIndex--;
 
@@ -160,7 +153,6 @@ document.addEventListener(
                     if (
                         letterIndex === 0
                     ) {
-
 
                         deleting = false;
 
@@ -208,10 +200,8 @@ document.addEventListener(
 
         function revealOnScroll() {
 
-
             revealElements.forEach(
                 function (element) {
-
 
                     const position =
                         element
@@ -250,54 +240,7 @@ document.addEventListener(
 
 
 
-        /* ========================= */
-        /* CARD CLICK EFFECT */
-        /* ========================= */
-
-        const cards =
-            document.querySelectorAll(
-                ".card"
-            );
-
-
-        cards.forEach(
-            function (card) {
-
-
-                card.addEventListener(
-                    "click",
-                    function () {
-
-
-                        card.classList.remove(
-                            "card-click"
-                        );
-
-
-                        void card.offsetWidth;
-
-
-                        card.classList.add(
-                            "card-click"
-                        );
-
-
-                        setTimeout(
-                            function () {
-
-                                card.classList.remove(
-                                    "card-click"
-                                );
-
-                            },
-                            180
-                        );
-
-                    }
-                );
-
-            }
-        );
+     
 
 
 
@@ -346,10 +289,8 @@ document.addEventListener(
 
         function setActiveNav(id) {
 
-
             navLinks.forEach(
                 function (link) {
-
 
                     link.classList.remove(
                         "active"
@@ -377,14 +318,12 @@ document.addEventListener(
 
 
         /* ========================= */
-        /* SCROLL NAV */
+        /* SCROLL NAVIGATION */
         /* ========================= */
 
         function updateActiveNavOnScroll() {
 
-
             if (isNavScrolling) {
-
                 return;
             }
 
@@ -403,7 +342,6 @@ document.addEventListener(
 
             sections.forEach(
                 function (section) {
-
 
                     if (
                         section.offsetTop <=
@@ -432,17 +370,15 @@ document.addEventListener(
 
 
         /* ========================= */
-        /* NAV CLICK */
+        /* NAVIGATION CLICK */
         /* ========================= */
 
         navLinks.forEach(
             function (link) {
 
-
                 link.addEventListener(
                     "click",
                     function (e) {
-
 
                         const targetId =
                             this.getAttribute(
@@ -457,7 +393,6 @@ document.addEventListener(
 
 
                         if (!target) {
-
                             return;
                         }
 
@@ -469,14 +404,19 @@ document.addEventListener(
                             targetId.substring(1);
 
 
-                        /* Activate immediately */
+                        /*
+                         * Move blue line immediately.
+                         */
 
                         setActiveNav(
                             sectionId
                         );
 
 
-                        /* Lock active-line update */
+                        /*
+                         * Pause scroll-based
+                         * active detection.
+                         */
 
                         isNavScrolling =
                             true;
@@ -504,7 +444,27 @@ document.addEventListener(
                             );
 
 
-                        /* Animation */
+                        /*
+                         * Restart animation on
+                         * every card.
+                         */
+
+                        const focusCards =
+                            target.querySelectorAll(
+                                ".card, .education-card"
+                            );
+
+
+                        focusCards.forEach(
+                            function (card) {
+
+                                card.classList.remove(
+                                    "section-focus"
+                                );
+
+                            }
+                        );
+
 
                         target.classList.remove(
                             "section-focus"
@@ -514,12 +474,35 @@ document.addEventListener(
                         void target.offsetWidth;
 
 
-                        target.classList.add(
-                            "section-focus"
-                        );
+                        if (
+                            focusCards.length > 0
+                        ) {
+
+                            focusCards.forEach(
+                                function (card, index) {
+
+                                    card.style.animationDelay =
+                                        `${index * 0.12}s`;
+
+                                    card.classList.add(
+                                        "section-focus"
+                                    );
+
+                                }
+                            );
+
+                        } else {
+
+                            target.classList.add(
+                                "section-focus"
+                            );
+
+                        }
 
 
-                        /* Smooth scroll */
+                        /*
+                         * Smooth scroll.
+                         */
 
                         target.scrollIntoView({
 
@@ -532,8 +515,26 @@ document.addEventListener(
                         });
 
 
+                        /*
+                         * Remove animation.
+                         */
+
                         setTimeout(
                             function () {
+
+                                focusCards.forEach(
+                                    function (card) {
+
+                                        card.classList.remove(
+                                            "section-focus"
+                                        );
+
+                                        card.style.animationDelay =
+                                            "";
+
+                                    }
+                                );
+
 
                                 target.classList.remove(
                                     "section-focus"
@@ -563,18 +564,12 @@ document.addEventListener(
             "scroll",
             function () {
 
-
-                if (
-                    !navScrollTicking
-                ) {
-
+                if (!navScrollTicking) {
 
                     window.requestAnimationFrame(
                         function () {
 
-
                             updateActiveNavOnScroll();
-
 
                             navScrollTicking =
                                 false;
@@ -585,7 +580,6 @@ document.addEventListener(
 
                     navScrollTicking =
                         true;
-
                 }
 
             },
