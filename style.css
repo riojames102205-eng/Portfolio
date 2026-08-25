@@ -229,6 +229,10 @@ nav {
     font-size: 32px;
 
     font-weight: 700;
+
+    text-decoration: none;
+
+    cursor: pointer;
 }
 
 

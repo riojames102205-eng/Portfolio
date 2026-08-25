@@ -3,6 +3,17 @@ document.addEventListener(
     function () {
 
 
+        if (
+            "scrollRestoration" in
+            history
+        ) {
+
+            history.scrollRestoration =
+                "manual";
+
+        }
+
+
         /* ========================= */
         /* DARK MODE */
         /* ========================= */
@@ -1238,6 +1249,33 @@ document.addEventListener(
                         );
 
                     }
+
+                }
+            );
+
+        }
+
+
+
+        /* ========================= */
+        /* LOGO REFRESH */
+        /* ========================= */
+
+        const logoLink =
+            document.getElementById(
+                "logoLink"
+            );
+
+
+        if (logoLink) {
+
+            logoLink.addEventListener(
+                "click",
+                function (e) {
+
+                    e.preventDefault();
+
+                    location.reload();
 
                 }
             );
