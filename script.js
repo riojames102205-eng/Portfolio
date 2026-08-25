@@ -1275,7 +1275,13 @@ document.addEventListener(
 
                     e.preventDefault();
 
-                    location.reload();
+                    window.scrollTo(
+                        0,
+                        0
+                    );
+
+                    location.href =
+                        location.pathname;
 
                 }
             );
