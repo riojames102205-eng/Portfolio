@@ -62,7 +62,6 @@ body {
     background: #2563eb;
 
     top: 100px;
-
     left: -150px;
 }
 
@@ -71,7 +70,6 @@ body {
     background: #7c3aed;
 
     bottom: 100px;
-
     right: -150px;
 
     animation-delay: 2s;
@@ -119,9 +117,6 @@ header {
         );
 
     z-index: 1000;
-
-    transition:
-        background-color 0.5s ease;
 }
 
 
@@ -180,10 +175,11 @@ nav a {
 
 
 /* ========================= */
-/* NAV UNDERLINE */
+/* BLUE NAV LINE */
 /* ========================= */
 
 nav a::after {
+
     content: "";
 
     position: absolute;
@@ -198,8 +194,7 @@ nav a::after {
 
     background: #2563eb;
 
-    transform:
-        scaleX(0);
+    transform: scaleX(0);
 
     transform-origin: center;
 
@@ -214,8 +209,7 @@ nav a:hover {
 
 
 nav a:hover::after {
-    transform:
-        scaleX(1);
+    transform: scaleX(1);
 }
 
 
@@ -225,8 +219,7 @@ nav a.active {
 
 
 nav a.active::after {
-    transform:
-        scaleX(1);
+    transform: scaleX(1);
 }
 
 
@@ -316,7 +309,7 @@ nav a.active::after {
 
 
 /* ========================= */
-/* PROFILE IMAGE */
+/* PROFILE */
 /* ========================= */
 
 .hero-image {
@@ -327,10 +320,7 @@ nav a.active::after {
     height: 370px;
 
     margin:
-        0
-        0
-        30px
-        55px;
+        0 0 30px 55px;
 
     display: block;
 
@@ -395,7 +385,7 @@ nav a.active::after {
 
 
 /* ========================= */
-/* HERO DESCRIPTION */
+/* HERO TEXT */
 /* ========================= */
 
 .description {
@@ -532,7 +522,7 @@ h2 {
 
 
 /* ========================= */
-/* ABOUT ME */
+/* ABOUT */
 /* ========================= */
 
 #about p {
@@ -610,8 +600,6 @@ h2 {
     font-size: 45px;
 
     margin-bottom: 15px;
-
-    transition: none;
 }
 
 
@@ -743,6 +731,7 @@ h2 {
 /* ========================= */
 
 .education-card {
+
     display: flex;
 
     align-items: flex-start;
@@ -771,6 +760,7 @@ h2 {
 
 
 .education-card:hover {
+
     transform:
         translateY(-8px)
         scale(1.02);
@@ -787,6 +777,7 @@ h2 {
 
 
 .education-icon {
+
     font-size: 45px;
 
     flex-shrink: 0;
@@ -794,13 +785,39 @@ h2 {
 
 
 .education-card h3 {
+
     color: #2563eb;
 
     margin-bottom: 8px;
 }
 
 
-.education-card p {
+/* School stays normal */
+
+.education-school {
+
+    font-weight: 600;
+
+    text-align: left;
+}
+
+
+/* ONLY current-year paragraph */
+
+.education-description {
+
+    line-height: 26px;
+
+    margin-bottom: 8px;
+
+    text-align: justify;
+}
+
+
+/* Expected graduation stays normal */
+
+.education-graduation {
+
     line-height: 26px;
 
     margin-bottom: 8px;
@@ -809,34 +826,36 @@ h2 {
 }
 
 
-.education-school {
-    font-weight: 600;
-}
-
-
 /* ========================= */
 /* CONTACT */
 /* ========================= */
 
 .contact-intro {
+
     max-width: 850px;
 
     line-height: 30px;
 
     margin-bottom: 25px;
 
-    text-align: left;
+    /* ONLY INTRO IS JUSTIFIED */
+
+    text-align: justify;
 }
 
 
 #contact p {
+
     margin: 12px 0;
 
     font-size: 18px;
+
+    text-align: left;
 }
 
 
 #contact a {
+
     color: #2563eb;
 
     text-decoration: none;
@@ -844,11 +863,13 @@ h2 {
 
 
 #contact a:hover {
+
     text-decoration: underline;
 }
 
 
 .contact-actions {
+
     margin-top: 25px;
 }
 
@@ -858,6 +879,7 @@ h2 {
 /* ========================= */
 
 .section-focus {
+
     animation:
         sectionShow
         0.7s
@@ -869,17 +891,21 @@ h2 {
 @keyframes sectionShow {
 
     from {
+
         opacity: 0.75;
 
         transform:
             translateY(18px);
+
     }
 
     to {
+
         opacity: 1;
 
         transform:
             translateY(0);
+
     }
 }
 
@@ -889,6 +915,7 @@ h2 {
 /* ========================= */
 
 .reveal {
+
     opacity: 0;
 
     transform:
@@ -901,6 +928,7 @@ h2 {
 
 
 .reveal.active {
+
     opacity: 1;
 
     transform:
@@ -933,6 +961,7 @@ h2 {
 /* ========================= */
 
 footer {
+
     color: #64748b;
 
     text-align: center;
@@ -948,6 +977,7 @@ footer {
 /* ========================= */
 
 body.dark {
+
     background: #0f172a;
 
     color: #e2e8f0;
@@ -955,6 +985,7 @@ body.dark {
 
 
 body.dark header {
+
     background:
         rgba(
             15,
@@ -975,41 +1006,49 @@ body.dark header {
 
 
 body.dark nav a {
+
     color: #e2e8f0;
 }
 
 
 body.dark nav a:hover {
+
     color: #60a5fa;
 }
 
 
 body.dark nav a.active {
+
     color: #60a5fa;
 }
 
 
 body.dark nav a::after {
+
     background: #60a5fa;
 }
 
 
 body.dark .hero h1 {
+
     color: #f8fafc;
 }
 
 
 body.dark .description {
+
     color: #cbd5e1;
 }
 
 
 body.dark .section-text {
+
     color: #cbd5e1;
 }
 
 
 body.dark .card {
+
     background: #1e293b;
 
     color: #e2e8f0;
@@ -1026,6 +1065,7 @@ body.dark .card {
 
 
 body.dark .education-card {
+
     background: #1e293b;
 
     color: #e2e8f0;
@@ -1042,11 +1082,13 @@ body.dark .education-card {
 
 
 body.dark .contact-intro {
+
     color: #cbd5e1;
 }
 
 
 body.dark .hero-image img {
+
     border-color: #1e293b;
 }
 
@@ -1057,7 +1099,9 @@ body.dark .hero-image img {
 
 @media (max-width: 900px) {
 
+
     nav {
+
         flex-direction: column;
 
         gap: 15px;
@@ -1065,6 +1109,7 @@ body.dark .hero-image img {
 
 
     nav ul {
+
         flex-wrap: wrap;
 
         justify-content: center;
@@ -1074,6 +1119,7 @@ body.dark .hero-image img {
 
 
     .hero {
+
         text-align: center;
 
         padding-top: 60px;
@@ -1081,11 +1127,13 @@ body.dark .hero-image img {
 
 
     .hero-text {
+
         min-height: auto;
     }
 
 
     .hero-image {
+
         float: none;
 
         width: 270px;
@@ -1102,6 +1150,7 @@ body.dark .hero-image img {
 
 
     .image-glow {
+
         width: 270px;
 
         height: 270px;
@@ -1109,15 +1158,15 @@ body.dark .hero-image img {
 
 
     .hero h1 {
+
         font-size: 45px;
     }
 
 
-    /*
-     * HERO TEXT ON MOBILE
-     */
+    /* HERO ON MOBILE */
 
     .description {
+
         text-align: justify;
 
         font-size: 17px;
@@ -1128,28 +1177,66 @@ body.dark .hero-image img {
     }
 
 
-    /*
-     * ABOUT
-     * SKILLS
-     * PROJECTS
-     */
+    /* ABOUT */
 
-    #about p,
+    #about p {
+
+        text-align: justify;
+    }
+
+
+    /* SKILLS */
 
     #skills .section-text,
 
-    #skills .card p,
+    #skills .card p {
+
+        text-align: justify;
+    }
+
+
+    /* PROJECTS */
 
     #projects .section-text,
 
     #projects .card p {
 
         text-align: justify;
+    }
 
+
+    /* EDUCATION */
+
+    .education-description {
+
+        text-align: justify;
+    }
+
+
+    .education-school,
+
+    .education-graduation {
+
+        text-align: left;
+    }
+
+
+    /* CONTACT */
+
+    .contact-intro {
+
+        text-align: justify;
+    }
+
+
+    #contact p:not(.contact-intro) {
+
+        text-align: left;
     }
 
 
     .buttons {
+
         justify-content: center;
 
         flex-wrap: wrap;
@@ -1157,6 +1244,7 @@ body.dark .hero-image img {
 
 
     .education-card {
+
         flex-direction: column;
     }
 
@@ -1169,26 +1257,29 @@ body.dark .hero-image img {
 
 @media (max-width: 500px) {
 
+
     nav ul {
+
         gap: 10px;
     }
 
 
     nav a {
+
         font-size: 13px;
     }
 
 
     .hero h1 {
+
         font-size: 38px;
     }
 
 
-    /*
-     * HERO TEXT
-     */
+    /* HERO */
 
     .description {
+
         font-size: 16px;
 
         line-height: 28px;
@@ -1199,28 +1290,66 @@ body.dark .hero-image img {
     }
 
 
-    /*
-     * ABOUT
-     * SKILLS
-     * PROJECTS
-     */
+    /* ABOUT */
 
-    #about p,
+    #about p {
+
+        text-align: justify;
+    }
+
+
+    /* SKILLS */
 
     #skills .section-text,
 
-    #skills .card p,
+    #skills .card p {
+
+        text-align: justify;
+    }
+
+
+    /* PROJECTS */
 
     #projects .section-text,
 
     #projects .card p {
 
         text-align: justify;
+    }
 
+
+    /* EDUCATION */
+
+    .education-description {
+
+        text-align: justify;
+    }
+
+
+    .education-school,
+
+    .education-graduation {
+
+        text-align: left;
+    }
+
+
+    /* CONTACT */
+
+    .contact-intro {
+
+        text-align: justify;
+    }
+
+
+    #contact p:not(.contact-intro) {
+
+        text-align: left;
     }
 
 
     .hero-image {
+
         width: 230px;
 
         height: 230px;
@@ -1228,6 +1357,7 @@ body.dark .hero-image img {
 
 
     .image-glow {
+
         width: 230px;
 
         height: 230px;
@@ -1241,6 +1371,7 @@ body.dark .hero-image img {
 /* ========================= */
 
 .contact-actions {
+
     display: flex;
 
     gap: 15px;
@@ -1252,6 +1383,7 @@ body.dark .hero-image img {
 
 
 .resume-button {
+
     display: inline-flex !important;
 
     align-items: center;
@@ -1269,5 +1401,6 @@ body.dark .hero-image img {
 
 
 .resume-button:hover {
+
     text-decoration: none !important;
 }
