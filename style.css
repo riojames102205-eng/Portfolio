@@ -18,6 +18,7 @@ body {
     transition: background-color 0.5s ease, color 0.5s ease;
 }
 
+
 /* ========================= */
 /* BACKGROUND */
 /* ========================= */
@@ -81,13 +82,11 @@ header {
 
 nav {
     max-width: 1200px;
-
     margin: auto;
 
     display: flex;
 
     justify-content: space-between;
-
     align-items: center;
 
     padding: 20px;
@@ -95,15 +94,12 @@ nav {
 
 .logo {
     color: #2563eb;
-
     font-size: 32px;
-
     font-weight: 700;
 }
 
 nav ul {
     display: flex;
-
     align-items: center;
 
     list-style: none;
@@ -128,7 +124,10 @@ nav a {
         color 0.3s ease;
 }
 
-/* ORIGINAL-STYLE BLUE LINE */
+
+/* ========================= */
+/* NAV UNDERLINE */
+/* ========================= */
 
 nav a::after {
     content: "";
@@ -136,11 +135,9 @@ nav a::after {
     position: absolute;
 
     left: 0;
-
     bottom: -6px;
 
     width: 100%;
-
     height: 2px;
 
     background: #2563eb;
@@ -160,8 +157,6 @@ nav a:hover {
 nav a:hover::after {
     transform: scaleX(1);
 }
-
-/* ACTIVE SECTION */
 
 nav a.active {
     color: #2563eb;
@@ -259,7 +254,6 @@ nav a.active::after {
     float: right;
 
     width: 370px;
-
     height: 370px;
 
     margin:
@@ -275,7 +269,6 @@ nav a.active::after {
 
 .image-glow {
     width: 370px;
-
     height: 370px;
 
     padding: 8px;
@@ -301,7 +294,6 @@ nav a.active::after {
 
 .hero-image img {
     width: 100%;
-
     height: 100%;
 
     object-fit: cover;
@@ -323,7 +315,7 @@ nav a.active::after {
 
 
 /* ========================= */
-/* DESCRIPTION */
+/* HERO DESCRIPTION */
 /* ========================= */
 
 .description {
@@ -450,18 +442,20 @@ h2 {
 
 
 /* ========================= */
-/* ABOUT */
+/* ABOUT ME */
 /* ========================= */
 
 #about p {
     margin-bottom: 18px;
 
     line-height: 30px;
+
+    text-align: justify;
 }
 
 
 /* ========================= */
-/* CARDS */
+/* SKILLS */
 /* ========================= */
 
 .cards {
@@ -533,13 +527,35 @@ h2 {
     color: #2563eb;
 }
 
-.card p {
+
+/* ONLY SKILLS CARD TEXT */
+
+#skills .card p {
     line-height: 26px;
+
+    text-align: justify;
 }
 
 .card:active {
     transform:
         scale(0.96);
+}
+
+
+/* ========================= */
+/* PROJECTS */
+/* ========================= */
+
+#projects .section-text {
+    text-align: justify;
+
+    line-height: 30px;
+}
+
+#projects .card p {
+    line-height: 26px;
+
+    text-align: justify;
 }
 
 
@@ -674,6 +690,8 @@ h2 {
     line-height: 26px;
 
     margin-bottom: 8px;
+
+    text-align: left;
 }
 
 .education-school {
@@ -949,14 +967,24 @@ body.dark .hero-image img {
         font-size: 45px;
     }
 
-    .description {
-        text-align: justify;
+    /* JUSTIFY ONLY THESE THREE SECTIONS */
 
-        text-indent: 0;
+    #about p,
+    #skills .section-text,
+    #skills .card p,
+    #projects .section-text,
+    #projects .card p {
+        text-align: justify;
+    }
+
+    .description {
+        text-align: left;
 
         font-size: 17px;
 
         line-height: 30px;
+
+        text-indent: 0;
     }
 
     .buttons {
@@ -989,12 +1017,22 @@ body.dark .hero-image img {
         font-size: 38px;
     }
 
+    /* ABOUT, SKILLS, PROJECTS */
+
+    #about p,
+    #skills .section-text,
+    #skills .card p,
+    #projects .section-text,
+    #projects .card p {
+        text-align: justify;
+    }
+
     .description {
         font-size: 16px;
 
         line-height: 28px;
 
-        text-align: justify;
+        text-align: left;
 
         text-indent: 0;
     }
