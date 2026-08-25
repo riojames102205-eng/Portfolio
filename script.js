@@ -1275,13 +1275,20 @@ document.addEventListener(
 
                     e.preventDefault();
 
-                    window.scrollTo(
-                        0,
-                        0
-                    );
+                    window.scrollTo({
 
-                    location.href =
-                        location.pathname;
+                        top: 0,
+
+                        behavior: "smooth"
+
+                    });
+
+
+                    history.pushState(
+                        null,
+                        "",
+                        location.pathname
+                    );
 
                 }
             );
