@@ -1,439 +1,500 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
 
 
-    /* ========================= */
-    /* DARK MODE */
-    /* ========================= */
+        /* ========================= */
+        /* DARK MODE */
+        /* ========================= */
 
-    const darkModeBtn =
-        document.getElementById("darkModeBtn");
-
-
-    if (darkModeBtn) {
-
-        if (
-            localStorage.getItem("darkMode") ===
-            "enabled"
-        ) {
-
-            document.body.classList.add("dark");
-
-            darkModeBtn.textContent = "☀️";
-        }
+        const darkModeBtn =
+            document.getElementById(
+                "darkModeBtn"
+            );
 
 
-        darkModeBtn.addEventListener(
-            "click",
-            function () {
-
-                document.body.classList.toggle("dark");
+        if (darkModeBtn) {
 
 
-                if (
-                    document.body.classList.contains(
-                        "dark"
-                    )
-                ) {
+            if (
+                localStorage.getItem(
+                    "darkMode"
+                ) === "enabled"
+            ) {
 
-                    darkModeBtn.textContent = "☀️";
+                document.body.classList.add(
+                    "dark"
+                );
 
-                    localStorage.setItem(
-                        "darkMode",
-                        "enabled"
-                    );
-
-                } else {
-
-                    darkModeBtn.textContent = "🌙";
-
-                    localStorage.setItem(
-                        "darkMode",
-                        "disabled"
-                    );
-
-                }
-
+                darkModeBtn.textContent =
+                    "☀️";
             }
-        );
-
-    }
 
 
-
-    /* ========================= */
-    /* TYPING EFFECT */
-    /* ========================= */
-
-    const typing =
-        document.getElementById("typing");
+            darkModeBtn.addEventListener(
+                "click",
+                function () {
 
 
-    if (typing) {
-
-        const words = [
-
-            "Computer Engineering Student",
-
-            "Future Software Engineer",
-
-            "Web Developer",
-
-            "Arduino Enthusiast"
-
-        ];
-
-
-        let wordIndex = 0;
-
-        let letterIndex = 0;
-
-        let deleting = false;
-
-
-        function typeEffect() {
-
-            const currentWord =
-                words[wordIndex];
-
-
-            if (!deleting) {
-
-                typing.textContent =
-                    currentWord.substring(
-                        0,
-                        letterIndex + 1
+                    document.body.classList.toggle(
+                        "dark"
                     );
-
-                letterIndex++;
-
-
-                if (
-                    letterIndex ===
-                    currentWord.length
-                ) {
-
-                    deleting = true;
-
-
-                    setTimeout(
-                        typeEffect,
-                        1500
-                    );
-
-
-                    return;
-                }
-
-            } else {
-
-                typing.textContent =
-                    currentWord.substring(
-                        0,
-                        letterIndex - 1
-                    );
-
-                letterIndex--;
-
-
-                if (
-                    letterIndex === 0
-                ) {
-
-                    deleting = false;
-
-                    wordIndex++;
 
 
                     if (
-                        wordIndex >=
-                        words.length
+                        document.body.classList.contains(
+                            "dark"
+                        )
                     ) {
 
-                        wordIndex = 0;
+                        darkModeBtn.textContent =
+                            "☀️";
+
+
+                        localStorage.setItem(
+                            "darkMode",
+                            "enabled"
+                        );
+
+                    } else {
+
+                        darkModeBtn.textContent =
+                            "🌙";
+
+
+                        localStorage.setItem(
+                            "darkMode",
+                            "disabled"
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+
+
+
+        /* ========================= */
+        /* TYPING EFFECT */
+        /* ========================= */
+
+        const typing =
+            document.getElementById(
+                "typing"
+            );
+
+
+        if (typing) {
+
+
+            const words = [
+
+                "Computer Engineering Student",
+
+                "Future Software Engineer",
+
+                "Web Developer",
+
+                "Arduino Enthusiast"
+
+            ];
+
+
+            let wordIndex = 0;
+
+            let letterIndex = 0;
+
+            let deleting = false;
+
+
+
+            function typeEffect() {
+
+
+                const currentWord =
+                    words[wordIndex];
+
+
+                if (!deleting) {
+
+
+                    typing.textContent =
+                        currentWord.substring(
+                            0,
+                            letterIndex + 1
+                        );
+
+
+                    letterIndex++;
+
+
+                    if (
+                        letterIndex ===
+                        currentWord.length
+                    ) {
+
+                        deleting = true;
+
+
+                        setTimeout(
+                            typeEffect,
+                            1500
+                        );
+
+
+                        return;
+                    }
+
+
+                } else {
+
+
+                    typing.textContent =
+                        currentWord.substring(
+                            0,
+                            letterIndex - 1
+                        );
+
+
+                    letterIndex--;
+
+
+                    if (
+                        letterIndex === 0
+                    ) {
+
+
+                        deleting = false;
+
+
+                        wordIndex++;
+
+
+                        if (
+                            wordIndex >=
+                            words.length
+                        ) {
+
+                            wordIndex = 0;
+                        }
+
                     }
 
                 }
 
+
+                setTimeout(
+                    typeEffect,
+                    deleting
+                        ? 50
+                        : 100
+                );
+
             }
 
 
-            setTimeout(
-                typeEffect,
-                deleting ? 50 : 100
+            typeEffect();
+
+        }
+
+
+
+        /* ========================= */
+        /* SCROLL REVEAL */
+        /* ========================= */
+
+        const revealElements =
+            document.querySelectorAll(
+                ".reveal"
+            );
+
+
+        function revealOnScroll() {
+
+
+            revealElements.forEach(
+                function (element) {
+
+
+                    const position =
+                        element
+                            .getBoundingClientRect()
+                            .top;
+
+
+                    const screenHeight =
+                        window.innerHeight;
+
+
+                    if (
+                        position <
+                        screenHeight - 80
+                    ) {
+
+                        element.classList.add(
+                            "active"
+                        );
+
+                    }
+
+                }
             );
 
         }
 
 
-        typeEffect();
-
-    }
-
-
-
-    /* ========================= */
-    /* SCROLL REVEAL */
-    /* ========================= */
-
-    const revealElements =
-        document.querySelectorAll(
-            ".reveal"
+        window.addEventListener(
+            "scroll",
+            revealOnScroll
         );
 
 
-    function revealOnScroll() {
-
-        revealElements.forEach(
-            function (element) {
-
-                const position =
-                    element
-                        .getBoundingClientRect()
-                        .top;
+        revealOnScroll();
 
 
-                const screenHeight =
-                    window.innerHeight;
+
+        /* ========================= */
+        /* CARD CLICK EFFECT */
+        /* ========================= */
+
+        const cards =
+            document.querySelectorAll(
+                ".card"
+            );
 
 
-                if (
-                    position <
-                    screenHeight - 80
-                ) {
+        cards.forEach(
+            function (card) {
 
-                    element.classList.add(
+
+                card.addEventListener(
+                    "click",
+                    function () {
+
+
+                        card.classList.remove(
+                            "card-click"
+                        );
+
+
+                        void card.offsetWidth;
+
+
+                        card.classList.add(
+                            "card-click"
+                        );
+
+
+                        setTimeout(
+                            function () {
+
+                                card.classList.remove(
+                                    "card-click"
+                                );
+
+                            },
+                            180
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+
+        /* ========================= */
+        /* ACTIVE NAVIGATION */
+        /* ========================= */
+
+        const navLinks =
+            Array.from(
+                document.querySelectorAll(
+                    'nav a[href^="#"]'
+                )
+            ).filter(
+                function (link) {
+
+                    return document.querySelector(
+                        link.getAttribute(
+                            "href"
+                        )
+                    );
+
+                }
+            );
+
+
+        const sections =
+            Array.from(
+                document.querySelectorAll(
+                    "section[id]"
+                )
+            );
+
+
+
+        function setActiveNav(id) {
+
+
+            navLinks.forEach(
+                function (link) {
+
+
+                    link.classList.remove(
                         "active"
                     );
 
-                }
 
-            }
-        );
+                    if (
+                        link.getAttribute(
+                            "href"
+                        ) ===
+                        `#${id}`
+                    ) {
 
-    }
+                        link.classList.add(
+                            "active"
+                        );
 
-
-    window.addEventListener(
-        "scroll",
-        revealOnScroll
-    );
-
-
-    revealOnScroll();
-
-
-
-    /* ========================= */
-    /* CARD CLICK EFFECT */
-    /* ========================= */
-
-    const cards =
-        document.querySelectorAll(
-            ".card"
-        );
-
-
-    cards.forEach(
-        function (card) {
-
-            card.addEventListener(
-                "click",
-                function () {
-
-                    card.classList.remove(
-                        "card-click"
-                    );
-
-
-                    void card.offsetWidth;
-
-
-                    card.classList.add(
-                        "card-click"
-                    );
-
-
-                    setTimeout(
-                        function () {
-
-                            card.classList.remove(
-                                "card-click"
-                            );
-
-                        },
-                        180
-                    );
+                    }
 
                 }
             );
 
         }
-    );
 
 
 
-    /* ========================= */
-    /* ACTIVE NAVIGATION */
-    /* ========================= */
-
-    const navLinks =
-        Array.from(
-            document.querySelectorAll(
-                'nav a[href^="#"]'
-            )
-        ).filter(
-            link =>
-                document.querySelector(
-                    link.getAttribute("href")
-                )
-        );
+        function updateActiveNavOnScroll() {
 
 
-    const sections =
-        Array.from(
-            document.querySelectorAll(
-                "section[id]"
-            )
-        );
+            const marker =
+                window.scrollY +
+                (
+                    window.innerHeight *
+                    0.35
+                );
 
 
-    function setActiveNav(id) {
+            let currentSection =
+                sections[0];
+
+
+            sections.forEach(
+                function (section) {
+
+
+                    if (
+                        section.offsetTop <=
+                        marker
+                    ) {
+
+                        currentSection =
+                            section;
+
+                    }
+
+                }
+            );
+
+
+            if (currentSection) {
+
+                setActiveNav(
+                    currentSection.id
+                );
+
+            }
+
+        }
+
+
+
+        /* ========================= */
+        /* NAV CLICK */
+        /* ========================= */
 
         navLinks.forEach(
             function (link) {
 
-                link.classList.remove(
-                    "active"
-                );
 
-
-                if (
-                    link.getAttribute("href") ===
-                    `#${id}`
-                ) {
-
-                    link.classList.add(
-                        "active"
-                    );
-
-                }
-
-            }
-        );
-
-    }
-
-
-
-    function updateActiveNavOnScroll() {
-
-        const marker =
-            window.scrollY +
-            (
-                window.innerHeight *
-                0.35
-            );
-
-
-        let currentSection =
-            sections[0];
-
-
-        sections.forEach(
-            function (section) {
-
-                if (
-                    section.offsetTop <=
-                    marker
-                ) {
-
-                    currentSection =
-                        section;
-
-                }
-
-            }
-        );
-
-
-        if (currentSection) {
-
-            setActiveNav(
-                currentSection.id
-            );
-
-        }
-
-    }
-
-
-
-    /* CLICK NAVIGATION */
-
-    navLinks.forEach(
-        function (link) {
-
-            link.addEventListener(
-                "click",
-                function () {
-
-                    setActiveNav(
-                        this
-                            .getAttribute(
-                                "href"
-                            )
-                            .substring(1)
-                    );
-
-                }
-            );
-
-        }
-    );
-
-
-
-    /* SCROLL NAVIGATION */
-
-    let navScrollTicking =
-        false;
-
-
-    window.addEventListener(
-        "scroll",
-        function () {
-
-            if (!navScrollTicking) {
-
-                window.requestAnimationFrame(
+                link.addEventListener(
+                    "click",
                     function () {
 
-                        updateActiveNavOnScroll();
 
-                        navScrollTicking =
-                            false;
+                        setActiveNav(
+                            this
+                                .getAttribute(
+                                    "href"
+                                )
+                                .substring(1)
+                        );
 
                     }
                 );
 
-
-                navScrollTicking =
-                    true;
             }
-
-        },
-        {
-            passive: true
-        }
-    );
+        );
 
 
 
-    /* INITIAL NAV STATE */
+        /* ========================= */
+        /* NAV SCROLL */
+        /* ========================= */
 
-    updateActiveNavOnScroll();
+        let navScrollTicking =
+            false;
 
-});
+
+        window.addEventListener(
+            "scroll",
+            function () {
+
+
+                if (
+                    !navScrollTicking
+                ) {
+
+
+                    window.requestAnimationFrame(
+                        function () {
+
+
+                            updateActiveNavOnScroll();
+
+
+                            navScrollTicking =
+                                false;
+
+                        }
+                    );
+
+
+                    navScrollTicking =
+                        true;
+                }
+
+            },
+            {
+                passive: true
+            }
+        );
+
+
+
+        /* ========================= */
+        /* INITIAL NAV */
+        /* ========================= */
+
+        updateActiveNavOnScroll();
+
+    }
+);
 
 
 
@@ -448,9 +509,11 @@ document
     .forEach(
         function (link) {
 
+
             link.addEventListener(
                 "click",
                 function (e) {
+
 
                     const targetId =
                         this.getAttribute(
@@ -465,6 +528,7 @@ document
 
 
                     if (!target) {
+
                         return;
                     }
 
@@ -472,7 +536,7 @@ document
                     e.preventDefault();
 
 
-                    /* Restart section animation */
+                    /* Restart animation */
 
                     target.classList.remove(
                         "section-focus"
@@ -491,9 +555,11 @@ document
 
                     target.scrollIntoView({
 
-                        behavior: "smooth",
+                        behavior:
+                            "smooth",
 
-                        block: "center"
+                        block:
+                            "center"
 
                     });
 
@@ -502,6 +568,7 @@ document
 
                     setTimeout(
                         function () {
+
 
                             target.classList.remove(
                                 "section-focus"
