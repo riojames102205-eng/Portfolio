@@ -240,7 +240,94 @@ document.addEventListener(
 
 
 
-     
+        /* ========================= */
+        /* BACK TO TOP + PROGRESS */
+        /* ========================= */
+
+        const backToTop =
+            document.getElementById(
+                "backToTop"
+            );
+
+
+        const scrollProgress =
+            document.getElementById(
+                "scrollProgress"
+            );
+
+
+        function toggleBackToTop() {
+
+            if (!backToTop) {
+                return;
+            }
+
+
+            if (
+                window.scrollY > 500
+            ) {
+
+                backToTop.classList.add(
+                    "show"
+                );
+
+            } else {
+
+                backToTop.classList.remove(
+                    "show"
+                );
+
+            }
+
+        }
+
+
+        function updateScrollProgress() {
+
+            if (!scrollProgress) {
+                return;
+            }
+
+
+            const docHeight =
+                document.documentElement.scrollHeight -
+                window.innerHeight;
+
+
+            const progress =
+                docHeight > 0
+                    ? (
+                        window.scrollY /
+                        docHeight *
+                        100
+                    )
+                    : 0;
+
+
+            scrollProgress.style.width =
+                progress + "%";
+
+        }
+
+
+        if (backToTop) {
+
+            backToTop.addEventListener(
+                "click",
+                function () {
+
+                    window.scrollTo({
+
+                        top: 0,
+
+                        behavior: "smooth"
+
+                    });
+
+                }
+            );
+
+        }
 
 
 
@@ -280,6 +367,73 @@ document.addEventListener(
 
         let navScrollTimer =
             null;
+
+
+
+        /* ========================= */
+        /* MOBILE MENU */
+        /* ========================= */
+
+        const menuBtn =
+            document.getElementById(
+                "menuBtn"
+            );
+
+
+        const navMenu =
+            document.querySelector(
+                "nav ul"
+            );
+
+
+        if (menuBtn && navMenu) {
+
+            menuBtn.addEventListener(
+                "click",
+                function () {
+
+                    navMenu.classList.toggle(
+                        "open"
+                    );
+
+
+                    const isOpen =
+                        navMenu.classList.contains(
+                            "open"
+                        );
+
+
+                    menuBtn.textContent =
+                        isOpen
+                            ? "✕"
+                            : "☰";
+
+                }
+            );
+
+
+            navLinks.forEach(
+                function (link) {
+
+                    link.addEventListener(
+                        "click",
+                        function () {
+
+                            navMenu.classList.remove(
+                                "open"
+                            );
+
+
+                            menuBtn.textContent =
+                                "☰";
+
+                        }
+                    );
+
+                }
+            );
+
+        }
 
 
 
@@ -571,6 +725,10 @@ document.addEventListener(
 
                             updateActiveNavOnScroll();
 
+                            updateScrollProgress();
+
+                            toggleBackToTop();
+
                             navScrollTicking =
                                 false;
 
@@ -610,6 +768,24 @@ document.addEventListener(
         /* ========================= */
 
         updateActiveNavOnScroll();
+
+        updateScrollProgress();
+
+        toggleBackToTop();
+
+
+        const yearSpan =
+            document.getElementById(
+                "year"
+            );
+
+
+        if (yearSpan) {
+
+            yearSpan.textContent =
+                new Date().getFullYear();
+
+        }
 
     }
 );
