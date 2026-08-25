@@ -1139,6 +1139,114 @@ document.addEventListener(
 
 
         /* ========================= */
+        /* COPY EMAIL */
+        /* ========================= */
+
+        const copyEmailBtn =
+            document.getElementById(
+                "copyEmailBtn"
+            );
+
+
+        const contactEmail =
+            document.getElementById(
+                "contactEmail"
+            );
+
+
+        if (
+            copyEmailBtn &&
+            contactEmail
+        ) {
+
+            copyEmailBtn.addEventListener(
+                "click",
+                async function () {
+
+                    const text =
+                        contactEmail.textContent.trim();
+
+
+                    try {
+
+                        await navigator.clipboard.writeText(
+                            text
+                        );
+
+                        const orig =
+                            this.textContent;
+
+                        this.textContent =
+                            "Copied!";
+
+                        this.classList.add(
+                            "copied"
+                        );
+
+                        setTimeout(
+                            function () {
+
+                                copyEmailBtn.textContent =
+                                    orig;
+
+                                copyEmailBtn.classList.remove(
+                                    "copied"
+                                );
+
+                            },
+                            1800
+                        );
+
+                    } catch (_) {
+
+                        const ta =
+                            document.createElement(
+                                "textarea"
+                            );
+
+                        ta.value = text;
+
+                        document.body.appendChild(
+                            ta
+                        );
+
+                        ta.select();
+
+                        document.execCommand(
+                            "copy"
+                        );
+
+                        document.body.removeChild(
+                            ta
+                        );
+
+                        this.textContent =
+                            "Copied!";
+
+                        setTimeout(
+                            function () {
+
+                                copyEmailBtn.textContent =
+                                    "Copy";
+
+                                copyEmailBtn.classList.remove(
+                                    "copied"
+                                );
+
+                            },
+                            1800
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+
+
+
+        /* ========================= */
         /* INITIAL */
         /* ========================= */
 

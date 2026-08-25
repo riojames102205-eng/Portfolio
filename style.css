@@ -898,6 +898,30 @@ h2::after {
 }
 
 
+.project-links {
+
+    display: flex;
+
+    gap: 14px;
+
+    flex-wrap: wrap;
+
+    margin-top: 8px;
+}
+
+
+.project-link.live {
+
+    color: #7c3aed;
+}
+
+
+.project-link.live:hover {
+
+    color: #2563eb;
+}
+
+
 .tech-badges {
 
     display: flex;
@@ -935,6 +959,14 @@ body.dark .tech-badges span {
     color: #a5b4fc;
 
     border-color: #3730a3;
+}
+
+
+.projects-cta {
+
+    text-align: center;
+
+    margin-top: 30px;
 }
 
 
@@ -1594,6 +1626,43 @@ footer {
 }
 
 
+.footer-social {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 20px;
+
+    margin-bottom: 12px;
+
+    flex-wrap: wrap;
+}
+
+
+.footer-social a {
+
+    color: #64748b;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition:
+        color 0.3s ease;
+}
+
+
+.footer-social a:hover {
+
+    color: #2563eb;
+
+    text-decoration: underline;
+}
+
+
 /* ========================= */
 /* DARK MODE */
 /* ========================= */
@@ -2070,6 +2139,57 @@ body.dark .hero-image img {
 .resume-button:hover {
 
     text-decoration: none !important;
+}
+
+
+/* ========================= */
+/* PRINT */
+/* ========================= */
+
+@media print {
+
+    .scroll-progress,
+    .back-to-top,
+    .menu-btn,
+    .dark-mode-btn,
+    .background-circle {
+
+        display: none !important;
+    }
+
+
+    header {
+
+        position: static;
+
+        box-shadow: none;
+    }
+
+
+    body {
+
+        background: white;
+
+        color: #1e293b;
+    }
+
+
+    .card,
+    .education-card {
+
+        box-shadow: none;
+
+        border: 1px solid #e2e8f0;
+
+        break-inside: avoid;
+    }
+
+
+    a {
+
+        text-decoration: none;
+    }
+
 }
 
 
