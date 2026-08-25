@@ -15,6 +15,7 @@ document.addEventListener(
 
         if (darkModeBtn) {
 
+
             if (
                 localStorage.getItem(
                     "darkMode"
@@ -48,7 +49,6 @@ document.addEventListener(
                         darkModeBtn.textContent =
                             "☀️";
 
-
                         localStorage.setItem(
                             "darkMode",
                             "enabled"
@@ -58,7 +58,6 @@ document.addEventListener(
 
                         darkModeBtn.textContent =
                             "🌙";
-
 
                         localStorage.setItem(
                             "darkMode",
@@ -86,6 +85,7 @@ document.addEventListener(
 
         if (typing) {
 
+
             const words = [
 
                 "Computer Engineering Student",
@@ -108,17 +108,20 @@ document.addEventListener(
 
             function typeEffect() {
 
+
                 const currentWord =
                     words[wordIndex];
 
 
                 if (!deleting) {
 
+
                     typing.textContent =
                         currentWord.substring(
                             0,
                             letterIndex + 1
                         );
+
 
                     letterIndex++;
 
@@ -143,11 +146,13 @@ document.addEventListener(
 
                 } else {
 
+
                     typing.textContent =
                         currentWord.substring(
                             0,
                             letterIndex - 1
                         );
+
 
                     letterIndex--;
 
@@ -155,6 +160,7 @@ document.addEventListener(
                     if (
                         letterIndex === 0
                     ) {
+
 
                         deleting = false;
 
@@ -202,8 +208,10 @@ document.addEventListener(
 
         function revealOnScroll() {
 
+
             revealElements.forEach(
                 function (element) {
+
 
                     const position =
                         element
@@ -255,9 +263,11 @@ document.addEventListener(
         cards.forEach(
             function (card) {
 
+
                 card.addEventListener(
                     "click",
                     function () {
+
 
                         card.classList.remove(
                             "card-click"
@@ -304,7 +314,9 @@ document.addEventListener(
                 function (link) {
 
                     return document.querySelector(
-                        link.getAttribute("href")
+                        link.getAttribute(
+                            "href"
+                        )
                     );
 
                 }
@@ -319,31 +331,25 @@ document.addEventListener(
             );
 
 
-        /*
-         * TRUE while the user is clicking
-         * a navigation link and the page
-         * is performing a smooth scroll.
-         */
-
-        let isNavScrolling = false;
+        let isNavScrolling =
+            false;
 
 
-        /*
-         * Timer used to stop the scroll lock.
-         */
-
-        let navScrollTimer = null;
+        let navScrollTimer =
+            null;
 
 
 
         /* ========================= */
-        /* SET ACTIVE NAV */
+        /* ACTIVE NAV */
         /* ========================= */
 
         function setActiveNav(id) {
 
+
             navLinks.forEach(
                 function (link) {
+
 
                     link.classList.remove(
                         "active"
@@ -371,16 +377,11 @@ document.addEventListener(
 
 
         /* ========================= */
-        /* FIND CURRENT SECTION */
+        /* SCROLL NAV */
         /* ========================= */
 
         function updateActiveNavOnScroll() {
 
-
-            /*
-             * Do not change the active
-             * link during smooth navigation.
-             */
 
             if (isNavScrolling) {
 
@@ -402,6 +403,7 @@ document.addEventListener(
 
             sections.forEach(
                 function (section) {
+
 
                     if (
                         section.offsetTop <=
@@ -430,55 +432,60 @@ document.addEventListener(
 
 
         /* ========================= */
-        /* NAVIGATION CLICK */
+        /* NAV CLICK */
         /* ========================= */
 
         navLinks.forEach(
             function (link) {
 
+
                 link.addEventListener(
                     "click",
-                    function () {
+                    function (e) {
+
 
                         const targetId =
-                            this
-                                .getAttribute(
-                                    "href"
-                                )
-                                .substring(1);
+                            this.getAttribute(
+                                "href"
+                            );
 
 
-                        /*
-                         * Immediately move the
-                         * active underline.
-                         */
+                        const target =
+                            document.querySelector(
+                                targetId
+                            );
+
+
+                        if (!target) {
+
+                            return;
+                        }
+
+
+                        e.preventDefault();
+
+
+                        const sectionId =
+                            targetId.substring(1);
+
+
+                        /* Activate immediately */
 
                         setActiveNav(
-                            targetId
+                            sectionId
                         );
 
 
-                        /*
-                         * Lock scroll-based
-                         * active detection.
-                         */
+                        /* Lock active-line update */
 
-                        isNavScrolling = true;
+                        isNavScrolling =
+                            true;
 
-
-                        /*
-                         * Clear any previous timer.
-                         */
 
                         clearTimeout(
                             navScrollTimer
                         );
 
-
-                        /*
-                         * Unlock after the
-                         * smooth animation.
-                         */
 
                         navScrollTimer =
                             setTimeout(
@@ -489,12 +496,52 @@ document.addEventListener(
 
 
                                     setActiveNav(
-                                        targetId
+                                        sectionId
                                     );
 
                                 },
                                 900
                             );
+
+
+                        /* Animation */
+
+                        target.classList.remove(
+                            "section-focus"
+                        );
+
+
+                        void target.offsetWidth;
+
+
+                        target.classList.add(
+                            "section-focus"
+                        );
+
+
+                        /* Smooth scroll */
+
+                        target.scrollIntoView({
+
+                            behavior:
+                                "smooth",
+
+                            block:
+                                "center"
+
+                        });
+
+
+                        setTimeout(
+                            function () {
+
+                                target.classList.remove(
+                                    "section-focus"
+                                );
+
+                            },
+                            900
+                        );
 
                     }
                 );
@@ -505,7 +552,7 @@ document.addEventListener(
 
 
         /* ========================= */
-        /* SCROLL ACTIVE NAV */
+        /* SCROLL EVENT */
         /* ========================= */
 
         let navScrollTicking =
@@ -516,14 +563,18 @@ document.addEventListener(
             "scroll",
             function () {
 
+
                 if (
                     !navScrollTicking
                 ) {
 
+
                     window.requestAnimationFrame(
                         function () {
 
+
                             updateActiveNavOnScroll();
+
 
                             navScrollTicking =
                                 false;
@@ -534,6 +585,7 @@ document.addEventListener(
 
                     navScrollTicking =
                         true;
+
                 }
 
             },
@@ -564,93 +616,6 @@ document.addEventListener(
         /* ========================= */
 
         updateActiveNavOnScroll();
-
-
-
-        /* ========================= */
-        /* SMOOTH NAVIGATION */
-        /* ========================= */
-
-        navLinks.forEach(
-            function (link) {
-
-                link.addEventListener(
-                    "click",
-                    function (e) {
-
-                        const targetId =
-                            this.getAttribute(
-                                "href"
-                            );
-
-
-                        const target =
-                            document.querySelector(
-                                targetId
-                            );
-
-
-                        if (!target) {
-                            return;
-                        }
-
-
-                        e.preventDefault();
-
-
-                        /*
-                         * Restart section animation.
-                         */
-
-                        target.classList.remove(
-                            "section-focus"
-                        );
-
-
-                        void target.offsetWidth;
-
-
-                        target.classList.add(
-                            "section-focus"
-                        );
-
-
-                        /*
-                         * Smooth scroll.
-                         */
-
-                        target.scrollIntoView({
-
-                            behavior:
-                                "smooth",
-
-                            block:
-                                "center"
-
-                        });
-
-
-                        /*
-                         * Remove animation after
-                         * the smooth movement.
-                         */
-
-                        setTimeout(
-                            function () {
-
-                                target.classList.remove(
-                                    "section-focus"
-                                );
-
-                            },
-                            900
-                        );
-
-                    }
-                );
-
-            }
-        );
 
     }
 );
