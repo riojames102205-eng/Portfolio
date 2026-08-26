@@ -15,6 +15,225 @@ document.addEventListener(
 
 
         /* ========================= */
+        /* CONTACT FORM (early - must attach before any error) */
+        /* ========================= */
+
+        (function () {
+
+            const cf =
+                document.getElementById(
+                    "contactForm"
+                );
+
+            const fs =
+                document.getElementById(
+                    "formStatus"
+                );
+
+            if (!cf) {
+                return;
+            }
+
+            const emailInput =
+                cf.elements["email"];
+
+            if (emailInput) {
+
+                emailInput.addEventListener(
+                    "input",
+                    function () {
+
+                        const val =
+                            this.value.trim();
+
+                        if (val === "") {
+
+                            this.classList.remove(
+                                "invalid",
+                                "valid"
+                            );
+
+                            if (fs) {
+                                fs.textContent = "";
+                            }
+
+                            return;
+                        }
+
+                        const ok =
+                            /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+                                val
+                            ) &&
+                            val
+                                .toLowerCase()
+                                .endsWith(
+                                    "@gmail.com"
+                                );
+
+                        if (!ok) {
+                            this.classList.add(
+                                "invalid"
+                            );
+                            this.classList.remove(
+                                "valid"
+                            );
+                        } else {
+                            this.classList.remove(
+                                "invalid"
+                            );
+                            this.classList.add(
+                                "valid"
+                            );
+                            if (fs) {
+                                fs.textContent = "";
+                            }
+                        }
+
+                    }
+                );
+
+            }
+
+            cf.addEventListener(
+                "submit",
+                async function (e) {
+
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    const name =
+                        this.elements[
+                            "name"
+                        ].value.trim();
+                    const email =
+                        this.elements[
+                            "email"
+                        ].value.trim();
+                    const message =
+                        this.elements[
+                            "message"
+                        ].value.trim();
+
+                    const emailPattern =
+                        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                    if (
+                        !name ||
+                        !email ||
+                        !message
+                    ) {
+                        if (fs) {
+                            fs.textContent =
+                                "Please fill in all fields.";
+                            fs.style.color =
+                                "#ef4444";
+                        }
+                        return;
+                    }
+
+                    if (
+                        !emailPattern.test(
+                            email
+                        ) ||
+                        !email
+                            .toLowerCase()
+                            .endsWith(
+                                "@gmail.com"
+                            )
+                    ) {
+                        if (fs) {
+                            fs.textContent =
+                                "Invalid Gmail. Please use a valid Gmail account.";
+                            fs.style.color =
+                                "#ef4444";
+                        }
+                        if (emailInput) {
+                            emailInput.classList.add(
+                                "invalid"
+                            );
+                            emailInput.classList.remove(
+                                "valid"
+                            );
+                        }
+                        return;
+                    }
+
+                    const submitBtn =
+                        this.querySelector(
+                            'button[type="submit"]'
+                        );
+
+                    if (fs) {
+                        fs.textContent = "Sending…";
+                        fs.style.color = "#2563eb";
+                    }
+                    if (submitBtn) {
+                        submitBtn.disabled = true;
+                        submitBtn.textContent =
+                            "Sending…";
+                    }
+
+                    try {
+                        const res = await fetch(
+                            "https://formspree.io/f/moeagnbr",
+                            {
+                                method: "POST",
+                                headers: {
+                                    Accept:
+                                        "application/json",
+                                    "Content-Type":
+                                        "application/json"
+                                },
+                                body: JSON.stringify({
+                                    name,
+                                    email,
+                                    message
+                                })
+                            }
+                        );
+                        if (res.ok) {
+                            if (fs) {
+                                fs.textContent = "Sent!";
+                                fs.style.color =
+                                    "#16a34a";
+                            }
+                            this.reset();
+                            if (emailInput) {
+                                emailInput.classList.remove(
+                                    "invalid",
+                                    "valid"
+                                );
+                            }
+                        } else {
+                            if (fs) {
+                                fs.textContent =
+                                    "Invalid Gmail. Please use a valid Gmail account.";
+                                fs.style.color =
+                                    "#ef4444";
+                            }
+                        }
+                    } catch (_) {
+                        if (fs) {
+                            fs.textContent =
+                                "Invalid Gmail. Please use a valid Gmail account.";
+                            fs.style.color = "#ef4444";
+                        }
+                    } finally {
+                        if (submitBtn) {
+                            submitBtn.disabled = false;
+                            submitBtn.textContent =
+                                "Send Message";
+                        }
+                    }
+
+                },
+                true
+            );
+
+        })();
+
+
+        /* ========================= */
         /* DARK MODE */
         /* ========================= */
 
@@ -942,210 +1161,7 @@ document.addEventListener(
 
 
 
-        /* ========================= */
-        /* CONTACT FORM */
-        /* ========================= */
-
-        const contactForm =
-            document.getElementById(
-                "contactForm"
-            );
-
-
-        const formStatus =
-            document.getElementById(
-                "formStatus"
-            );
-
-
-        if (contactForm) {
-
-            contactForm.addEventListener(
-                "submit",
-                async function (e) {
-
-                    e.preventDefault();
-
-
-                    const name =
-                        this.elements[
-                            "name"
-                        ].value.trim();
-
-                    const email =
-                        this.elements[
-                            "email"
-                        ].value.trim();
-
-                    const message =
-                        this.elements[
-                            "message"
-                        ].value.trim();
-
-
-                    if (
-                        !name ||
-                        !email ||
-                        !message
-                    ) {
-
-                        if (formStatus) {
-
-                            formStatus.textContent =
-                                "Please fill in all fields.";
-
-                            formStatus.style.color =
-                                "#ef4444";
-
-                        }
-
-
-                        return;
-                    }
-
-
-                    const submitBtn =
-                        this.querySelector(
-                            'button[type="submit"]'
-                        );
-
-
-                    if (formStatus) {
-
-                        formStatus.textContent =
-                            "Sending…";
-
-                        formStatus.style.color =
-                            "#2563eb";
-
-                    }
-
-
-                    if (submitBtn) {
-
-                        submitBtn.disabled =
-                            true;
-
-                        submitBtn.textContent =
-                            "Sending…";
-
-                    }
-
-
-                    try {
-
-                        const res =
-                            await fetch(
-                                "https://formspree.io/f/moeagnbr",
-                                {
-                                    method: "POST",
-
-                                    headers: {
-                                        Accept:
-                                            "application/json",
-
-                                        "Content-Type":
-                                            "application/json"
-                                    },
-
-                                    body: JSON.stringify(
-                                        {
-                                            name,
-                                            email,
-                                            message
-                                        }
-                                    )
-                                }
-                            );
-
-
-                        if (res.ok) {
-
-                            if (formStatus) {
-
-                                formStatus.textContent =
-                                    "Message sent! I'll reply soon.";
-
-                                formStatus.style.color =
-                                    "#16a34a";
-
-                            }
-
-
-                            this.reset();
-
-                        } else {
-
-                            let msg =
-                                "Failed to send. Please try again.";
-
-                            try {
-
-                                const data =
-                                    await res.json();
-
-                                if (
-                                    data.errors
-                                ) {
-
-                                    msg =
-                                        data.errors
-                                            .map(
-                                                function (
-                                                    err
-                                                ) {
-                                                    return err.message;
-                                                }
-                                            )
-                                            .join(", ");
-
-                                }
-
-                            } catch (_) {}
-
-
-                            if (formStatus) {
-
-                                formStatus.textContent =
-                                    msg;
-
-                                formStatus.style.color =
-                                    "#ef4444";
-
-                            }
-
-                        }
-
-                    } catch (_) {
-
-                        if (formStatus) {
-
-                            formStatus.textContent =
-                                "Network error. Please try again or email directly at jamespro102205@gmail.com.";
-
-                            formStatus.style.color =
-                                "#ef4444";
-
-                        }
-
-                    } finally {
-
-                        if (submitBtn) {
-
-                            submitBtn.disabled =
-                                false;
-
-                            submitBtn.textContent =
-                                "Send Message";
-
-                        }
-
-                    }
-
-                }
-            );
-
-        }
+        /* CONTACT FORM handled early at top */
 
 
 

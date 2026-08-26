@@ -1012,7 +1012,9 @@
                 <input
                     type="email"
                     name="email"
-                    placeholder="Your Email"
+                    placeholder="yourname@gmail.com"
+                    pattern="^[a-zA-Z0-9._%+\-]+@gmail\.com$"
+                    title="Please enter a valid Gmail address (e.g., name@gmail.com)"
                     required
                 >
 
@@ -1127,6 +1129,34 @@
     </div>
 
 
+
+    <script>
+        // Fallback lightbox - works even if main script fails
+        (function () {
+            const lb = document.getElementById('lightbox');
+            const lbImg = document.getElementById('lightboxImg');
+            const lbClose = document.getElementById('lightboxClose');
+            function open(src, alt) {
+                if (!lb || !lbImg) return;
+                lbImg.src = src; lbImg.alt = alt || '';
+                lb.classList.add('open');
+                lb.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+            }
+            function close() {
+                if (!lb) return;
+                lb.classList.remove('open');
+                lb.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+            }
+            document.querySelectorAll('.certificate-image img').forEach(function (img) {
+                img.addEventListener('click', function () { open(this.src, this.alt); });
+            });
+            if (lbClose) lbClose.addEventListener('click', close);
+            if (lb) lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && lb && lb.classList.contains('open')) close(); });
+        })();
+    </script>
 
     <script src="script.js"></script>
 

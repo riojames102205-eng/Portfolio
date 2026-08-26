@@ -1047,6 +1047,8 @@ body.dark .tech-badges span {
 
     display: block;
 
+    cursor: zoom-in;
+
     transition:
         transform 0.5s ease;
 }
@@ -1316,6 +1318,37 @@ body.dark .copy-btn:hover {
             124,
             58,
             237,
+            0.15
+        );
+}
+
+
+.contact-form input.invalid,
+.contact-form textarea.invalid {
+
+    border-color: #ef4444;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(
+            239,
+            68,
+            68,
+            0.15
+        );
+}
+
+
+.contact-form input.valid {
+
+    border-color: #16a34a;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(
+            22,
+            163,
+            74,
             0.15
         );
 }
