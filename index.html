@@ -1131,6 +1131,26 @@
 
 
     <script>
+        // Fallback hamburger - works even if main script fails
+        (function () {
+            const mb = document.getElementById('menuBtn');
+            const nm = document.querySelector('nav ul');
+            if (mb && nm) {
+                mb.addEventListener('click', function () {
+                    nm.classList.toggle('open');
+                    this.textContent = nm.classList.contains('open') ? '✕' : '☰';
+                });
+                document.querySelectorAll('nav a').forEach(function (a) {
+                    a.addEventListener('click', function () {
+                        nm.classList.remove('open');
+                        if (mb) mb.textContent = '☰';
+                    });
+                });
+            }
+        })();
+    </script>
+
+    <script>
         // Fallback lightbox - works even if main script fails
         (function () {
             const lb = document.getElementById('lightbox');
