@@ -254,9 +254,6 @@ document.addEventListener(
                 document.body.classList.add(
                     "dark"
                 );
-
-                darkModeBtn.textContent =
-                    "☀️";
             }
 
 
@@ -275,18 +272,12 @@ document.addEventListener(
                         )
                     ) {
 
-                        darkModeBtn.textContent =
-                            "☀️";
-
                         localStorage.setItem(
                             "darkMode",
                             "enabled"
                         );
 
                     } else {
-
-                        darkModeBtn.textContent =
-                            "🌙";
 
                         localStorage.setItem(
                             "darkMode",

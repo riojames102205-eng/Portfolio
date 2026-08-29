@@ -319,33 +319,66 @@ nav a.active::after {
 /* DARK MODE BUTTON */
 /* ========================= */
 
-.dark-mode-btn {
+/* ========================= */
+/* DARK MODE TOGGLE */
+/* ========================= */
+
+.dark-mode-toggle {
     border: none;
-
     background: transparent;
-
-    font-size: 22px;
-
     cursor: pointer;
-
-    padding: 5px;
-
-    transition:
-        transform 0.4s ease;
+    padding: 0;
 }
 
-
-.dark-mode-btn:hover {
-    transform:
-        rotate(20deg)
-        scale(1.2);
+.toggle-track {
+    display: block;
+    width: 52px;
+    height: 28px;
+    background: #d1d5db;
+    border-radius: 999px;
+    position: relative;
+    transition: background 0.3s ease;
 }
 
-.dark-mode-btn:active {
+body.dark .toggle-track {
+    background: #4f46e5;
+}
 
-    transform:
-        scale(0.7)
-        rotate(180deg);
+.toggle-thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 22px;
+    height: 22px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+body.dark .toggle-thumb {
+    transform: translateX(24px);
+}
+
+.icon-moon {
+    display: block;
+    color: #6b7280;
+}
+
+body.dark .icon-moon {
+    display: none;
+}
+
+.icon-sun {
+    display: none;
+    color: #f59e0b;
+}
+
+body.dark .icon-sun {
+    display: block;
 }
 
 
@@ -861,9 +894,22 @@ h2::after {
 
 .card-icon {
 
-    font-size: 45px;
-
     margin-bottom: 15px;
+
+    text-align: center;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+.card-icon img,
+
+.card-icon svg {
+
+    display: block;
 }
 
 
@@ -2188,7 +2234,7 @@ body.dark .hero-image img {
     .scroll-progress,
     .back-to-top,
     .menu-btn,
-    .dark-mode-btn,
+    .dark-mode-toggle,
     .background-circle {
 
         display: none !important;
